@@ -1,64 +1,67 @@
--- Samuel Creator Hub - The Rake Remastered
-local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local UIListLayout = Instance.new("UIListLayout")
-local uis = game:GetService("UserInputService")
+-- Samuel Creator Hub - GUI test
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "SamuelHubGUI"
 
--- Criar botão de abrir/fechar
-local Toggle = Instance.new("TextButton", ScreenGui)
-Toggle.Size = UDim2.new(0, 100, 0, 30)
-Toggle.Position = UDim2.new(0, 10, 0, 10)
-Toggle.Text = "Abrir Hub"
-Toggle.BackgroundColor3 = Color3.new(0, 0.5, 1)
-Toggle.TextColor3 = Color3.new(1, 1, 1)
+-- Botão de abrir/fechar
+local toggle = Instance.new("TextButton", gui)
+toggle.Size = UDim2.new(0, 120, 0, 30)
+toggle.Position = UDim2.new(0, 10, 0, 10)
+toggle.Text = "Abrir Hub"
+toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 200)
+toggle.TextColor3 = Color3.new(1, 1, 1)
 
--- Frame principal
-MainFrame.Size = UDim2.new(0, 200, 0, 400)
-MainFrame.Position = UDim2.new(0, 10, 0, 50)
-MainFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-MainFrame.Visible = false
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Parent = ScreenGui
+-- Janela principal
+local main = Instance.new("Frame", gui)
+main.Size = UDim2.new(0, 220, 0, 400)
+main.Position = UDim2.new(0, 10, 0, 50)
+main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+main.Visible = false
+main.Active = true
+main.Draggable = true
 
-UIListLayout.Parent = MainFrame
-UIListLayout.Padding = UDim.new(0, 5)
+-- Layout com scroll
+local scroll = Instance.new("ScrollingFrame", main)
+scroll.Size = UDim2.new(1, 0, 1, 0)
+scroll.CanvasSize = UDim2.new(0, 0, 0, 1000)
+scroll.ScrollBarThickness = 6
+scroll.BackgroundTransparency = 1
 
--- Lista com nomes e links dos scripts
+local layout = Instance.new("UIListLayout", scroll)
+layout.Padding = UDim.new(0, 5)
+
+-- Lista de scripts (nome + link)
 local scripts = {
-    {name = "Modo Deus", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/O%20Rakegodmod.lua"},
-    {name = "ESP Rake", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeRakeEsp.lua"},
-    {name = "ESP Jogadores", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePlayersEsp.lua"},
-    {name = "ESP Sucata", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeScrapEsp.lua"},
-    {name = "ESP Localizações", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeAllLocations.lua"},
-    {name = "Desligar Torre", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeTowerLightOff.lua"},
-    {name = "Abrir SafeHouse", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeOpenSafeHouse.lua"},
-    {name = "Stun Aura", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStunAura.lua"},
-    {name = "Noclip", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeNoclip.lua"},
-    {name = "Stamina Infinita", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStamina.lua"},
-    {name = "X-Ray", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeXray.lua"},
-    {name = "Tempo do Jogo", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeGameTime.lua"},
-    {name = "Energia do Gerador", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePower.lua"},
+    {"Modo Deus", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/O%20Rakegodmod.lua"},
+    {"ESP Rake", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeRakeEsp.lua"},
+    {"ESP Jogadores", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePlayersEsp.lua"},
+    {"ESP Sucata", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeScrapEsp.lua"},
+    {"ESP Localizações", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeAllLocations.lua"},
+    {"Desligar Torre", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeTowerLightOff.lua"},
+    {"Abrir SafeHouse", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeOpenSafeHouse.lua"},
+    {"Stun Aura", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStunAura.lua"},
+    {"Noclip", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeNoclip.lua"},
+    {"Stamina Infinita", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStamina.lua"},
+    {"X-Ray", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeXray.lua"},
+    {"Tempo do Jogo", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeGameTime.lua"},
+    {"Energia do Gerador", "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePower.lua"},
 }
 
--- Criar os botões do Hub
-for _, item in ipairs(scripts) do
-    local btn = Instance.new("TextButton")
+-- Criar botões do Hub
+for _, data in ipairs(scripts) do
+    local btn = Instance.new("TextButton", scroll)
     btn.Size = UDim2.new(1, -10, 0, 30)
-    btn.Text = item.name
-    btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    btn.Text = data[1]
+    btn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
     btn.TextColor3 = Color3.new(1, 1, 1)
-    btn.Parent = MainFrame
 
     btn.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet(item.url))()
+        loadstring(game:HttpGet(data[2]))()
     end)
 end
 
--- Abrir/fechar o painel
-Toggle.MouseButton1Click:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
-    Toggle.Text = MainFrame.Visible and "Fechar Hub" or "Abrir Hub"
+-- Mostrar/esconder menu
+toggle.MouseButton1Click:Connect(function()
+    main.Visible = not main.Visible
+    toggle.Text = main.Visible and "Fechar Hub" or "Abrir Hub"
 end)
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")

@@ -1,69 +1,116 @@
--- Samuel Hub Principal
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local UIListLayout = Instance.new("UIListLayout")
-local ToggleButton = Instance.new("TextButton")
+-- Carregar Rayfield do seu repositório
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/Rayfield.lua"))()
 
-ScreenGui.Name = "SamuelHub"
-ScreenGui.Parent = game.CoreGui
+-- Criar janela principal
+local Window = Rayfield:CreateWindow({
+   Name = "Samuel Rake Hub",
+   LoadingTitle = "Samuel Creator",
+   LoadingSubtitle = "by SamuelJSK",
+   ConfigurationSaving = {
+      Enabled = false
+   },
+   Discord = {
+      Enabled = false
+   },
+   KeySystem = false
+})
 
-Frame.Name = "Main"
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Frame.Position = UDim2.new(0.3, 0, 0.3, 0)
-Frame.Size = UDim2.new(0, 300, 0, 400)
-Frame.Active = true
-Frame.Draggable = true
+-- ABA: ESP
+local EspTab = Window:CreateTab("ESP", 4483362458)
 
-UICorner.Parent = Frame
+EspTab:CreateButton({
+   Name = "ESP Rake (Vida e Distância)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeRakeEsp.lua"))()
+   end
+})
 
-UIListLayout.Parent = Frame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 4)
+EspTab:CreateButton({
+   Name = "ESP Localizações (Safe House, Torre etc)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeAllLocations.lua"))()
+   end
+})
 
--- Botões com require para os scripts
-local scripts = {
-    {nome = "Modo Deus", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/The%20Rakegodmod.lua"},
-    {nome = "ESP Localizações", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeAllLocations.lua"},
-    {nome = "ESP Rake", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeRakeEsp.lua"},
-    {nome = "ESP Jogadores", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePlayersEsp.lua"},
-    {nome = "ESP Scrap", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeScrapEsp.lua"},
-    {nome = "Abrir Safehouse", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeOpenSafeHouse.lua"},
-    {nome = "Desligar Torre", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeTowerLightOff.lua"},
-    {nome = "Noclip", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeNoclip.lua"},
-    {nome = "Stamina Infinita", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStamina.lua"},
-    {nome = "Stun Aura", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeStunAura.lua"},
-    {nome = "XRay", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeXray.lua"},
-    {nome = "Tempo do Jogo", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakeGameTime.lua"},
-    {nome = "Energia do Gerador", url = "https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/main/rakePower.lua"},
-}
+EspTab:CreateButton({
+   Name = "ESP Sucata (Scrap)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeScrapEsp.lua"))()
+   end
+})
 
-for _, data in pairs(scripts) do
-    local btn = Instance.new("TextButton")
-    btn.Parent = Frame
-    btn.Text = data.nome
-    btn.Size = UDim2.new(1, -10, 0, 30)
-    btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet(data.url))()
-    end)
-end
+EspTab:CreateButton({
+   Name = "ESP Jogadores (Vida e Distância)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakePlayersEsp.lua"))()
+   end
+})
 
--- Botão para esconder e mostrar
-ToggleButton.Parent = ScreenGui
-ToggleButton.Text = "Abrir SamuelHub"
-ToggleButton.Size = UDim2.new(0, 150, 0, 40)
-ToggleButton.Position = UDim2.new(0, 10, 0.5, -20)
-ToggleButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ToggleButton.Active = true
-ToggleButton.Draggable = true
+-- ABA: VANTAGENS
+local VantagensTab = Window:CreateTab("Vantagens", 4483362458)
 
-local visible = true
-ToggleButton.MouseButton1Click:Connect(function()
-    visible = not visible
-    Frame.Visible = visible
-    ToggleButton.Text = visible and "Fechar SamuelHub" or "Abrir SamuelHub"
-end)
+VantagensTab:CreateButton({
+   Name = "Modo Deus",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/The%20Rakegodmod.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Stun Stick Aura (20m)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeStunAura.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Abrir Safe House",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeOpenSafeHouse.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Desligar Luz da Torre",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeTowerLightOff.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Ativar Noclip",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeNoclip.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Stamina Infinita",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeStamina.lua"))()
+   end
+})
+
+VantagensTab:CreateButton({
+   Name = "Ativar X-Ray",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeXray.lua"))()
+   end
+})
+
+-- ABA: INFORMAÇÕES
+local InfoTab = Window:CreateTab("Informações", 4483362458)
+
+InfoTab:CreateButton({
+   Name = "Mostrar Tempo do Jogo (Game Time)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakeGameTime.lua"))()
+   end
+})
+
+InfoTab:CreateButton({
+   Name = "Mostrar Energia do Gerador (Power)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/SAMUELSCRIPTKNG/SamuelRakeScript/principal/rakePower.lua"))()
+   end
+})
